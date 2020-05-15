@@ -1,0 +1,28 @@
+.panel-header a {
+	text-decoration:none;
+	color:#337ab7;
+}
+.panel-header a:hover {
+	color: #551A8B
+}
+.panel-content h3{
+  letter-spacing: -1px;
+}
+.submit-button button{
+	background-color:#337ab7;
+}
+.submit-button {
+	text-align:center;
+}
+.blog-detail {
+	border-radius: 10px; 
+	margin-top:20px;
+	background-color:#eee;
+	padding: 30px 20px 20px 30px;
+}
+.blog-comment{
+	border-radius: 10px; 
+	margin-top:20px;
+	background-color:#eee;
+	padding: 20px 10px 10px 30px;
+}
