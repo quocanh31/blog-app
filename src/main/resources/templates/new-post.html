@@ -24,14 +24,17 @@
 	</header>
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-sm-6 py-5 justify-content-center">
-                            <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
-				<form method="post" action="/login">
+			<div class="col-sm-6 py-5 justify-content-center text-centers">
+                <ul th:each="message: ${messages}">
+                    <li th:text= "${message}" class="alert alert-danger">    
+                </ul>
+                <p style="color: red;">Write new post</p>
+				<form method="post" action="/new-post">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Username" name="username">
+						<input type="text" class="form-control" placeholder="Title" name="title">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Paswword" name="password">
+						<textarea class="form-control" placeholder="Body" name="body"></textarea>
 					</div>
 					<div class="submit-button">
                                             <button type="submit" class="btn btn-primary">Submit</button>

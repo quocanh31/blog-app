@@ -8,12 +8,15 @@ package com.example.demo.model;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -45,7 +48,7 @@ public class User {
    @Column(name ="password", nullable = false)
    private String password;
    
-   @ManyToMany
+   @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(
            name = "user_role",
            joinColumns = @JoinColumn(name = "user_id"),
@@ -53,7 +56,10 @@ public class User {
            
    )
    private Set<Role> roles;
-   
+
+   @OneToMany(mappedBy = "user")
+    private Set<Post> posts;
+
    public int getId(){
        return id;
    }
@@ -109,5 +115,12 @@ public class User {
        this.roles = roles;
    }
    
+   public Set<Post> getPost() {
+       return posts;
+   }
+   
+   public void setPost(Set<Post> posts){
+       this.posts = posts;
+   }
    
 }

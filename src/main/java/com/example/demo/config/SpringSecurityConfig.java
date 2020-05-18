@@ -35,6 +35,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .failureUrl("/login?error")
                 .and()
              .authorizeRequests()
+                .antMatchers("/new-post").hasRole("MEMBER")
                 .antMatchers("/**").permitAll().and()
                 .cors().and().csrf().disable();
     }
