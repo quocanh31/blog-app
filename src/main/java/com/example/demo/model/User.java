@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -54,7 +56,10 @@ public class User {
            
    )
    private Set<Role> roles;
-   
+
+   @OneToMany(mappedBy = "user")
+    private Set<Post> posts;
+
    public int getId(){
        return id;
    }
@@ -110,5 +115,12 @@ public class User {
        this.roles = roles;
    }
    
+   public Set<Post> getPost() {
+       return posts;
+   }
+   
+   public void setPost(Set<Post> posts){
+       this.posts = posts;
+   }
    
 }
