@@ -43,7 +43,6 @@ public class RegisterController {
         , @RequestParam String email,  @RequestParam String password, @RequestParam String lastname, @RequestParam String username,RedirectAttributes redirectAttrs) {
       // @ResponseBody means the returned String is the response, not a view name
       // @RequestParam means it is a parameter from the GET or POST request
-      System.out.println("AAAAAAA");
       if (roleRepository.findByName("ROLE_ADMIN") == null) {
           roleRepository.save(new Role("ROLE_ADMIN"));
       }
@@ -51,8 +50,9 @@ public class RegisterController {
       if (roleRepository.findByName("ROLE_MEMBER") == null) {
         roleRepository.save(new Role("ROLE_MEMBER"));
       }
-      if(userRepository.findByUsername(username)!=null)
+      if(userRepository.findByUsername(username)== null)
       {         
+          System.out.println("AAAAA");
         User n = new User();
         n.setLastname(lastname);
         n.setUsername(username);
@@ -69,6 +69,6 @@ public class RegisterController {
       }
         redirectAttrs.addFlashAttribute("message", "Username has been existed!!");
         redirectAttrs.addFlashAttribute("alertClass", "alert-danger");
-        return "redirect:registratrion";
+        return "redirect:register";
     }
 }

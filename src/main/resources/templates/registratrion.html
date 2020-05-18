@@ -25,6 +25,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-sm-6 py-5">
+                            <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
 				<form method="post" action="/register">
 					<div class="form-group">
 						<input class="form-control" placeholder="Name" name ="name">

@@ -6,8 +6,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Role;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public interface RoleRepository extends CrudRepository<Role, Integer>{
-    @Query("select r from Role r where r.name = ?1")
+public interface RoleRepository extends JpaRepository<Role, Integer>{
     public Role findByName(String name);
 }
