@@ -13,15 +13,7 @@
     <title>Spring boot blog</title>
   </head>
   <body>
-    <header>
-		<nav class="navbar navbar-dark bg-dark justify-content-between px-5">
-			<a class="navbar-brand" href="/">Blog app</a>
-			<div class="navbar-nav d-flex flex-row">
-				<a class="nav-link mr-4" href="/register">Registration</a>
-				<a class="nav-link"href="/login">Log in</a>
-			</div>
-		</nav>
-	</header>
+      <div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-sm-6 py-5">
@@ -51,13 +43,7 @@
 	</div>
 	</div>
 	<!-- Footer -->
-	<footer class="page-footer">
-		<hr>
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-1">© 2020 Copyright
-		</div>
-		<!-- Copyright -->
-	</footer>
+        <div th:replace="fragments/footer :: footer"></div>
 	<!-- Footer -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

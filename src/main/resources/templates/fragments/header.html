@@ -9,32 +9,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 		
     <title>Spring boot blog</title>
   </head>
   <body>
-      <div th:replace="fragments/header :: header"></div>
-	<div class="container">
-            <div  th:each="post: ${posts}">
-		<div class="row d-flex flex-column">
-			<div class="panel-header py-4 d-flex flex-column">
-				<a href="#"><h1 th:text="${post.title}"></h1></a>
-                                <small>Created: <span th:text="${#dates.format(post.createDate,'dd-MM-yyyy')}"></span> by</small>
-                                <a th:href="@{'/blog/' + ${post.user.username}}"><small th:text="${post.user.username}"></small></a>
+    <header th:fragment="header">
+		<nav class="navbar navbar-dark bg-dark justify-content-between px-5">
+			<a class="navbar-brand" href="/">Blog app</a>
+			<div sec:authorize="isAnonymous()"class="navbar-nav d-flex flex-row">
+				<a class="nav-link mr-4" href="/register">Registration</a>
+				<a class="nav-link"href="/login">Log in</a>
 			</div>
-			<div class="panel-content text-justify pb-2">
-				<h3 class=" font-weight-normal " th:text="${post.body}"></h3>
-			</div>  
-		</div>
-                <hr>
-            </div>
-	</div>
-	<!-- Footer -->
-        <div th:replace="fragments/footer :: footer"></div>
-	<!-- Footer -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                        <div sec:authorize="isAuthenticated()" class="navbar-nav d-flex flex-row">
+                            <div th:each="role : ${#authentication.getAuthorities()}"> 
+                                <a th:if="${#strings.toString(role) == 'ROLE_MEMBER'}" class="nav-link mr-4" th:href="@{'/blog/' + ${#authentication.getName()}}">My Blog</a>
+                            </div>
+                            <div th:each="role : ${#authentication.getAuthorities()}"> 
+                                <a th:if="${#strings.toString(role) == 'ROLE_MEMBER'}" class="nav-link mr-4" href="/new-post">New Post</a>
+                            </div>
+                            <a class="nav-link mr-4" href="/logout">Sign Out</a>
+                        </div>
+		</nav>
+	</header>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
