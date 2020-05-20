@@ -47,6 +47,6 @@ public class PostController {
         System.out.println(post.getTitle() + post.getBody() + post.getUser() + post.getCreateDate());
         postRepository.save(post);
 
-        return "home";
+        return "redirect:";
     }
 }
