@@ -24,6 +24,7 @@
 			<div class="panel-content text-justify pb-2">
 				<h3 class=" font-weight-normal " th:text="${post.body}"></h3>
 			</div>
+                        <a th:if="${isowner}" th:href="@{'/editPost/' +${post.id}}"><button class="btn btn-primary">Edit post</button></a>
 		</div>
 		<h3 class="mt-3 text-danger">Comments:</h3>
 		<div class="blog-comment" th:each="comment : ${comments}">
