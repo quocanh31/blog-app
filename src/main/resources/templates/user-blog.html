@@ -22,7 +22,7 @@
             <div  th:each="post: ${posts}">
 		<div class="row d-flex flex-column">
 			<div class="panel-header py-4 d-flex flex-column">
-				<a href="#"><h1 th:text="${post.title}"></h1></a>
+				<a th:href="@{'/blog/' + ${post.user.username} + '/' + ${post.id}}"><h1 th:text="${post.title}"></h1></a>
                                 <small>Created: <span th:text="${#dates.format(post.createDate,'dd-MM-yyyy')}"></span> by</small>
                                 <a th:href="@{'/blog/' + ${post.user.username}}"><small th:text="${post.user.username}"></small></a>
 			</div>

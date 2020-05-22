@@ -52,7 +52,6 @@ public class RegisterController {
       }
       if(userRepository.findByUsername(username)== null)
       {         
-          System.out.println("AAAAA");
         User n = new User();
         n.setLastname(lastname);
         n.setUsername(username);

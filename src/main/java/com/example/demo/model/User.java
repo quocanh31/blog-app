@@ -59,6 +59,9 @@ public class User {
 
    @OneToMany(mappedBy = "user")
     private Set<Post> posts;
+   
+   @OneToMany(mappedBy = "user")
+   private Set<Comment> comments;
 
    public int getId(){
        return id;
@@ -121,6 +124,14 @@ public class User {
    
    public void setPost(Set<Post> posts){
        this.posts = posts;
+   }
+   
+   public Set<Comment> getComment() {
+       return comments;
+   }
+   
+   public void setComment(Set<Comment> comments){
+       this.comments = comments;
    }
    
 }

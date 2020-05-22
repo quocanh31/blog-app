@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,6 +29,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false) 
     private User user;
+    
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments;
 
     public int getId(){
         return id;
@@ -65,5 +69,13 @@ public class Post {
 
     public void setCreateDate(Date date) {
         this.createDate = date;
+    }
+    
+    public void setComment(Set<Comment> comments){
+        this.comments = comments;
+    }
+    
+    public Set<Comment> getComment(){
+        return comments;
     }
 }

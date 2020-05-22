@@ -36,6 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
              .authorizeRequests()
                 .antMatchers("/new-post").hasRole("MEMBER")
+                .antMatchers("/commentPost/**").hasRole("MEMBER")
                 .antMatchers("/**").permitAll().and()
                 .cors().and().csrf().disable()
                 .logout().logoutSuccessUrl("/").logoutUrl("/logout").permitAll();
