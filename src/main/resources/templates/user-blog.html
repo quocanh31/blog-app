@@ -33,6 +33,11 @@
                 <hr>
             </div>
 	</div>
+        <div class="pagination justify-content-center"  th:if="${posts.totalPages gt 0}">
+                        <a th:if ="${posts.number!= 0}" th:href="@{'?page='+ ${posts.number lt 2 ? 1 : posts.number-1}}" >&laquo;</a>
+                        <a th:each="i : ${#numbers.sequence( 1, posts.totalPages, 1)}" class="page-link" th:href="@{'?page=' + ${i}}" th:text="${i}" th:classappend="${i eq posts.number + 1} ? 'active'"></a>
+                        <a th:if="${posts.number != posts.totalPages-1}" th:href="@{'?page='+ ${posts.number+2}}" >&raquo;</a>
+        </div>  
 	<!-- Footer -->
         <div th:replace="fragments/footer :: footer"></div>
 	<!-- Footer -->

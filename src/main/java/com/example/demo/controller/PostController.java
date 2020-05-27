@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Comment;
+import com.example.demo.model.PageModel;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +20,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,8 @@ public class PostController {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PageModel pagemodel;
     @GetMapping("/new-post")
     public String newPost(){
         return "new-post";
@@ -59,10 +64,12 @@ public class PostController {
     
     @RequestMapping(value = "/blog/{username}", method=RequestMethod.GET)
     public String userBlog(Model model, @PathVariable("username") String username){
+        pagemodel.setSIZE(1);
+        pagemodel.initPageAndSize();
         User user = userRepository.findByUsername(username);
         if (user == null) return "error-404";
         else{
-            List<Post> Posts = postRepository.findByUserOrderByCreateDateDesc(user);
+            Page<Post> Posts = postRepository.findByUserOrderByCreateDateDesc(user, PageRequest.of(pagemodel.getPAGE(), pagemodel.getSIZE()));
             model.addAttribute("posts", Posts);
             model.addAttribute("user", user);
             return "user-blog";

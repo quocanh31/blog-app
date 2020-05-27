@@ -26,3 +26,29 @@
 	background-color:#eee;
 	padding: 20px 10px 10px 30px;
 }
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #337ab7;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+div.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0;
+  background: #CCC;
+}

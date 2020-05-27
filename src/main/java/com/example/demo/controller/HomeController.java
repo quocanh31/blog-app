@@ -5,12 +5,15 @@
  */
 package com.example.demo.controller;
 
+import com.example.demo.model.PageModel;
 import com.example.demo.model.Post;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.repository.UserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,13 @@ public class HomeController {
     UserRepository userRepository;
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
+    PageModel pagemodel;
     @RequestMapping(value="/",method=RequestMethod.GET)
     public String home(Model model){
-        List<Post> Posts = postRepository.findAllByOrderByCreateDateDesc();
+        pagemodel.setSIZE(1);
+        pagemodel.initPageAndSize();
+        Page<Post> Posts = postRepository.findAllByOrderByCreateDateDesc(PageRequest.of(pagemodel.getPAGE(), pagemodel.getSIZE()));
         model.addAttribute("posts", Posts);
         return "home";
     }
